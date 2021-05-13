@@ -1,0 +1,8 @@
+Deny from all
+Allow from 127.0.0.1
+Allow from localhost
+AuthType Basic
+AuthName "Private zone. Only for administrator!"
+DirectoryIndex index.php
+IndexIgnore *.php
+Options -Indexes

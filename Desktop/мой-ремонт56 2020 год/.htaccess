@@ -1,0 +1,47 @@
+#кодировка#
+AddDefaultCharset UTF-8
+
+#запрещаем вывод ошибок#
+php_flag error_reporting 0
+
+#время жизни сессии#
+php_value session.gc_maxlifetime 86400
+php_value session.cookie_lifetime 0
+
+#запрет глобальных переменных#
+php_flag register_globals off
+
+#экранирование кавычек#
+php_value magic_quotes_gpc on
+
+#Для нежелательных User Agents (ботов)#
+SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Java.* [NC,OR]
+SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]
+SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]
+SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]
+SetEnvIfNoCase user-Agent ^Zeus [NC]
+<limit get=”” post=”” head=””>
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot
+</limit>
+
+#Защищаем сайт от DOS-атак#
+LimitRequestBody 10240000
+
+#Создаем кастомные страницы ошибок#
+ErrorDocument 401 /error/401.php
+ErrorDocument 403 /error/403.php
+ErrorDocument 404 /error/404.php
+ErrorDocument 500 /error/500.php
+
+#убираем .php#
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+#перенаправление#
+redirect /config/config_db.php https://www.youtube.com/watch?v=aqt8fN2o9sw
